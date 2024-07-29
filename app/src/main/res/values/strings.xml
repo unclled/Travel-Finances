@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Travel Finances</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="main_page">Главная</string>
+    <string name="statistic_page">Статистика</string>
+    <string name="add_page">Добавить</string>
+    <string name="new_travel">Добавить новую поездку</string>
+    <string name="travel_name">Название поездки</string>
+    <string name="data_hint">ДД.ММ.ГГГГ</string>
+    <string name="departure">Отъезд</string>
+    <string name="arrival">Прибытие</string>
+    <string name="split_expenses">Делить расходы на несколько человек</string>
+    <string name="button_minus">-</string>
+    <string name="button_plus">+</string>
+    <string name="min_split">2</string>
+    <string name="save_travel">Добавить поездку</string>
+</resources>

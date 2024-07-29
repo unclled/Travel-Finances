@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.tf.travelfinances.ui.new_travel.NewTravelVM" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        tools:context=".ui.new_travel.NewTravelActivity">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/travelName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="360dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="50dp"
+            android:hint="@string/travel_name"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/main_green"
+            app:counterEnabled="true"
+            app:counterMaxLength="34"
+            app:counterOverflowTextColor="@color/main_green"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="52dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="@string/departure"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_bold" />
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="@string/arrival"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_marginStart="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.vicmikhailau.maskededittext.MaskedEditText
+                android:id="@+id/departure"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:hint="@string/data_hint"
+                app:mask="##.##.####"
+                android:layout_marginEnd="20dp"
+                android:inputType="numberSigned"/>
+
+            <com.vicmikhailau.maskededittext.MaskedEditText
+                android:id="@+id/arrival"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:hint="@string/data_hint"
+                app:mask="##.##.####"
+                android:inputType="numberSigned"/>
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/splitExpenses"
+            android:layout_width="360dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/split_expenses"
+            android:textSize="16sp"
+            android:textColor="@color/grey_text"
+            android:fontFamily="@font/montserrat_bold"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonMinus"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="@string/button_minus"
+                android:background="@drawable/circle_button"/>
+
+            <EditText
+                android:id="@+id/peopleForSplit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:letterSpacing="1.5"
+                android:inputType="number"
+                android:text="@string/min_split"
+                android:maxLength="1"
+                android:autofillHints="no" />
+
+            <Button
+                android:id="@+id/buttonPlus"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="@string/button_plus"
+                android:background="@drawable/circle_button"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/cap_rounded"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="bottom"
+            android:text="@string/save_travel"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+</layout>
