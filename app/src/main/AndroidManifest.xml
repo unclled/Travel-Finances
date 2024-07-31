@@ -23,7 +23,7 @@
         </activity>
         
         <activity
-            android:name=".ui.new_travel.NewTravelModel"
+            android:name=".ui.new_travel.NewTravelView"
             android:exported="false" />
     </application>
 

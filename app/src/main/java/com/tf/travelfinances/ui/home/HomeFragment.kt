@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.tf.travelfinances.databinding.FragmentHomeBinding
+import com.tf.travelfinances.ui.new_travel.NewTravelView
+import com.tf.travelfinances.ui.new_travel.NewTravelViewModel
 
 class HomeFragment : Fragment() {
 
@@ -45,7 +47,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun createNewTravel() {
-        val intent = Intent(requireContext(), NewTravelModel::class.java)
+        val intent = Intent(requireContext(), NewTravelView::class.java)
         startActivity(intent)
         Toast.makeText(context, "New Travel Clicked", Toast.LENGTH_SHORT).show()
     }

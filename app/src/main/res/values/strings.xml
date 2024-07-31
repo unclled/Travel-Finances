@@ -6,7 +6,7 @@
     <string name="main_page">Главная</string>
     <string name="statistic_page">Статистика</string>
     <string name="add_page">Добавить</string>
-    <string name="new_travel">Добавить новую поездку</string>
+    <string name="add_new_travel">Добавить новую поездку</string>
     <string name="travel_name">Название поездки</string>
     <string name="data_hint">ДД.ММ.ГГГГ</string>
     <string name="departure">Отъезд</string>
@@ -16,4 +16,8 @@
     <string name="button_plus">+</string>
     <string name="min_split">2</string>
     <string name="save_travel">Добавить поездку</string>
+    <string name="human_1">Человек 1</string>
+    <string name="human_2">Человек 2</string>
+    <string name="human_name">Имя человека</string>
+    <string name="new_travel">Новая поездка</string>
 </resources>
