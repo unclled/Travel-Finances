@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.tf.travelfinances.ui.home.HomeFragment"
+        android:name="com.tf.travelfinances.ui.home.HomeView"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/navigation_statistics"

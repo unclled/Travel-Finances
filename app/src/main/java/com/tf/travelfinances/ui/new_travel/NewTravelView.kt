@@ -1,54 +1,42 @@
 // NewTravelActivity.kt
 package com.tf.travelfinances.ui.new_travel
 
-import android.annotation.SuppressLint
+import NewTravelViewModel
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.tf.travelfinances.Database.MainDB
 import com.tf.travelfinances.R
-import com.tf.travelfinances.Database.Travel
 import com.tf.travelfinances.databinding.NewTravelBinding
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class NewTravelView : AppCompatActivity() {
 
     private lateinit var binding: NewTravelBinding
     private val viewModel: NewTravelViewModel by viewModels()
+    private var database: MainDB? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = NewTravelBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setupListeners()
-
-        lifecycleScope.launch {
-            viewModel.travels.collect { travels ->
-                // Обновляем UI с данными о путешествиях
-            }
-        }
+        //this.deleteDatabase("travels.db");
+        database = MainDB.getTravelDB(this)
     }
 
     private fun setupListeners() {
         binding.buttonSave.setOnClickListener {
-            val travel = Travel(
-                name = binding.travelName.editText?.text.toString(),
-                departure = binding.departure.text.toString().toLong(),
-                arrival = binding.arrival.text.toString().toLong(),
-                splitExpenses = binding.splitExpenses.isChecked,
-                peopleForSplit = binding.peopleForSplit.text.toString().toInt()
-            )
-            viewModel.addTravel(travel)
+            exportTravelData()
         }
 
         binding.buttonPlus.setOnClickListener {
@@ -68,6 +56,78 @@ class NewTravelView : AppCompatActivity() {
                 removeLastHuman()
             }
         }
+
+        binding.splitExpenses.setOnClickListener {
+            showHide(binding.splitBox)
+            showHide(binding.peopleList)
+        }
+    }
+
+    private fun exportTravelData() {
+        val humanNames = mutableListOf<String>()
+        val name = binding.travelName.editText?.text.toString()
+        val departure = binding.departure.text.toString()
+        val arrival = binding.arrival.text.toString()
+        val splitExpenses = binding.splitExpenses.isChecked
+        val peopleForSplit = binding.peopleForSplit.text.toString().toIntOrNull() ?: 1
+
+        when {
+            name.isBlank() -> {
+                showWarning("Укажите название поездки!")
+                return
+            }
+
+            departure.isBlank() -> {
+                showWarning("Укажите дату отъезда!")
+                return
+            }
+
+            arrival.isBlank() -> {
+                showWarning("Укажите дату прибытия!")
+                return
+            }
+
+            viewModel.isValidDate(arrival, departure) == 0 -> {
+                showWarning("Укажите корректную дату отъезда!")
+                return
+            }
+
+            viewModel.isValidDate(arrival, departure) == -1 -> {
+                showWarning("Укажите корректную дату прибытия!")
+                return
+            }
+
+            viewModel.isValidDate(arrival, departure) == -2 -> {
+                showWarning("Ошибка преобразования даты, попробуйте еще раз!")
+                return
+            }
+        }
+        if (binding.splitExpenses.isChecked) {
+            for (i in 0 until binding.peopleList.childCount) {
+                val child = binding.peopleList.getChildAt(i)
+                if (child is TextInputLayout) {
+                    val editText = child.editText
+                    val name = editText?.text.toString()
+                    if (name.isNotBlank()) {
+                        humanNames.add(name)
+                    } else {
+                        showWarning("Заполните все поля с именами!")
+                        humanNames.clear()
+                        return
+                    }
+                }
+            }
+        }
+        viewModel.addTravel(
+            name,
+            departure,
+            arrival,
+            splitExpenses,
+            peopleForSplit,
+            humanNames,
+            database!!
+        )
+        this.finish()
     }
 
     private fun removeLastHuman() {
@@ -116,4 +176,15 @@ class NewTravelView : AppCompatActivity() {
         peopleList.addView(newHumanLayout)
     }
 
+    private fun showWarning(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun showHide(view: View) {
+        view.visibility = if (view.visibility == View.VISIBLE) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
+    }
 }

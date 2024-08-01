@@ -7,7 +7,7 @@ import com.tf.travelfinances.Database.Travel
 import kotlinx.coroutines.flow.Flow
 
 class TravelRepository(context: Context) {
-    private val travelDao = MainDB.getTravelData(context).getDao()
+    private val travelDao = MainDB.getTravelDB(context).getDao()
 
     fun getTravels(): Flow<List<Travel>> {
         return travelDao.getTravels()

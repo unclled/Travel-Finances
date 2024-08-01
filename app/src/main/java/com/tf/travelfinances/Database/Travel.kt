@@ -10,9 +10,10 @@ import androidx.room.PrimaryKey
 data class Travel (
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null,
-    var name: String?,
-    var departure: Long?,
-    var arrival: Long?,
+    var name: String,
+    var departure: String,
+    var arrival: String,
     var splitExpenses: Boolean = false,
-    var peopleForSplit: Int = 0
+    var peopleForSplit: Int? = null,
+    var humanNames: MutableList<String>? = null
 )

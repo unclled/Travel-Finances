@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:layout_gravity="top"
         android:layout_marginTop="-10dp"
         android:background="@drawable/cap_rounded"
@@ -17,7 +17,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:text="@string/new_travel"
@@ -28,15 +27,15 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
             android:gravity="center|top"
             android:isScrollContainer="true"
             android:orientation="vertical"
-            android:layout_marginTop="8dp"
             tools:context=".ui.new_travel.NewTravelActivity">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -114,9 +113,11 @@
                 android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/splitBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <Button
                     android:id="@+id/buttonMinus"
@@ -152,7 +153,8 @@
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/human1"
@@ -199,12 +201,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="14dp"
                 android:background="@drawable/cap_rounded"
                 android:fontFamily="@font/montserrat_bold"
                 android:gravity="center"
-                android:text="@string/save_travel"
-                android:visibility="visible"
-                android:layout_marginBottom="20dp" />
+                android:text="@string/save_travel" />
 
 
         </LinearLayout>
